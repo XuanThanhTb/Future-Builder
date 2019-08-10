@@ -45,16 +45,11 @@
 
 
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-
-
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:future_builder/test/testModel.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -104,6 +99,7 @@ class CounterStorage {
   Future<File> writeCounter(dynamic counter) async {
     // có thể parse thành json từ List hoặc Map đều được
     String encodedDoughnut = jsonEncode(counter);
+    debugger();
     final file = await _localFile;
     // Write the file
     return file.writeAsString(encodedDoughnut);
@@ -111,8 +107,8 @@ class CounterStorage {
 }
 
 class FlutterDemo extends StatefulWidget {
-  final CounterStorage storage;
 
+  final CounterStorage storage;
   FlutterDemo({Key key, @required this.storage}) : super(key: key);
 
   @override
@@ -128,12 +124,12 @@ class _FlutterDemoState extends State<FlutterDemo> {
     super.initState();
     // dữ liệu lấy ra từ storage ra dạng json
     widget.storage.readCounter().then((value) {
+      debugger();
       value.map((item) {
         var v = Doughnut.fromJson(item);
         // bug không map đc list ra thêm vào mảng.
         listResult.add(v);
       }).toList();
-      debugger();
       setState(() {
         result = listResult;
       });
@@ -160,7 +156,7 @@ class _FlutterDemoState extends State<FlutterDemo> {
       appBar: AppBar(title: Text('Reading and Writing Files')),
       body: Center(
         child: Text(
-          'Button tapped ${listResult[2].price}'// time${_counter == 1 ? '' : 's'}.',
+          'Button tapped ${listResult[0].price}'// time${_counter == 1 ? '' : 's'}.',
         ),
       ),
       floatingActionButton: FloatingActionButton(
