@@ -1,60 +1,9 @@
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
-
-// void main() => runApp(MyApp());
-
-// class MyApp extends StatelessWidget{
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       theme: ThemeData(
-//         primarySwatch: Colors.blue
-//       ),
-//       home: FutureBuilderApp(title: 'Users'),
-//     );
-//   }
-// }
-
-// class FutureBuilderApp extends StatefulWidget{
-
-//   FutureBuilderApp({Key key, this.title}): super(key: key);
-//   final String title;
-
-//   @override
-//   _FutureBuilderAppState createState() => _FutureBuilderAppState();
-// }
-
-// class _FutureBuilderAppState extends State<FutureBuilderApp>{
-
-
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         backgroundColor: Colors.yellowAccent,
-//         title: Text('Future Builder', style: TextStyle(fontSize: 24, color: Colors.black)),
-//       ),
-//       body: Container(
-        
-//       ),
-//     );
-//   }
-// }
-
-
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-
-
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:future_builder/test/testModel.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -75,36 +24,27 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 class CounterStorage {
   Future<File> get _localFile async {
-    final directory = await getApplicationDocumentsDirectory();
+    debugger();
+    final directory = await getApplicationDocumentsDirectory(); 
+    //Khởi tạo file  có đuôi là txt để cho ta lưu dữ liệu vào đó trước.
     return File('${directory.path}/testStorage.txt');
   }
 
-  // Future<File> get _localFile async {
-  //   final path = await _localPath;
-  //   return File('${directory.path}/counterr.txt');
-  // }
-
   Future<dynamic> readCounter() async {
-    // dynamic decodedDoughnut;
-    // try {
       final file = await _localFile;
-      // Read the file
       String contents = await file.readAsString();
       debugger();
       return jsonDecode(contents);
-    // } catch (e) {
-    //   // If encountering an error, return 0
-    //   return decodedDoughnut;
-    // }
   }
 
   Future<File> writeCounter(dynamic counter) async {
     // có thể parse thành json từ List hoặc Map đều được
     String encodedDoughnut = jsonEncode(counter);
     final file = await _localFile;
+
+
     // Write the file
     return file.writeAsString(encodedDoughnut);
   }

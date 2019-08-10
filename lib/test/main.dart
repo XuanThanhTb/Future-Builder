@@ -73,6 +73,7 @@ class MyApp extends StatelessWidget {
 
 class CounterStorage {
   Future<File> get _localFile async {
+    debugger();
     final directory = await getApplicationDocumentsDirectory();
     return File('${directory.path}/testStorage.txt');
   }
